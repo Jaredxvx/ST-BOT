@@ -10,22 +10,22 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+// 2. Dito mo idugtong yung luma mong code (yung startProject o yung logic ng bot)
 const { spawn } = require("child_process");
-const log = require("./logger/log.js");
 
 function startProject() {
-	const child = spawn("node", ["Goat.js"], {
-		cwd: __dirname,
-		stdio: "inherit",
-		shell: true
-	});
+    const child = spawn("node", ["Goat.js"], {
+        cwd: __dirname,
+        stdio: "inherit",
+        shell: true
+    });
 
-	child.on("close", (code) => {
-		if (code == 2) {
-			log.info("Restarting Project...");
-			startProject();
-		}
-	});
+    child.on("close", (code) => {
+        if (code == 2) {
+            startProject();
+        }
+    });
 }
 
 startProject();
